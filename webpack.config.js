@@ -8,21 +8,22 @@ const PATH_SRC = resolve(__dirname, 'src')
 
 const isDev = process.env.NODE_ENV === 'development'
 
+const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`
+
 const plugins = [
   new HtmlWebpackPlugin({
     template: `${PATH_SRC}/index.html`
   }),
   new CleanWebpackPlugin(),
   new MiniCssExtractPlugin({
-    filename: isDev ? '[name].css' : '[name].[contenthash].css',
-    chunkFilename: isDev ? '[id].css' : '[id].[contenthash].css',
+    filename: filename('css'),
   })
 ]
 
 module.exports = {
   entry: `${PATH_SRC}/index.js`,
   output: {
-    filename: isDev ? '[name].[hash].js': '[name].[contenthash].js',
+    filename: filename('js'),
     path: resolve(__dirname, 'dist')
   },
   module: {
