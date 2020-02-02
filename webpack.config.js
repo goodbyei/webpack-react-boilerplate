@@ -4,21 +4,38 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
+const TerserWebpackPlugin  = require('terser-webpack-plugin')
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+
 const PATH_SRC = resolve(__dirname, 'src')
 
 const isDev = process.env.NODE_ENV === 'development'
+const isProd = !isDev
 
 const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`
 
 const plugins = [
   new HtmlWebpackPlugin({
-    template: `${PATH_SRC}/index.html`
+    template: `${PATH_SRC}/index.html`,
+    minify: {
+      collapseWhitespace: isProd
+    },
   }),
   new CleanWebpackPlugin(),
   new MiniCssExtractPlugin({
     filename: filename('css'),
   })
 ]
+
+const optimization = {
+  splitChunks: {
+    chunks: 'all'
+  },
+  minimizer: [
+    new TerserWebpackPlugin(),
+    new OptimizeCssAssetsPlugin()
+  ]
+}
 
 module.exports = {
   entry: `${PATH_SRC}/index.js`,
@@ -52,6 +69,7 @@ module.exports = {
     ]
   },
   plugins,
+  optimization,
   devServer: {
     host: '0.0.0.0',
     port: '9000',
