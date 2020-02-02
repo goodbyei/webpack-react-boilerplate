@@ -6,21 +6,23 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const PATH_SRC = resolve(__dirname, 'src')
 
+const isDev = process.env.NODE_ENV === 'development'
+
 const plugins = [
   new HtmlWebpackPlugin({
     template: `${PATH_SRC}/index.html`
   }),
   new CleanWebpackPlugin(),
   new MiniCssExtractPlugin({
-    filename: '[name].[contenthash].css',
-    chunkFilename: '[id].[contenthash].css',
+    filename: isDev ? '[name].css' : '[name].[contenthash].css',
+    chunkFilename: isDev ? '[id].css' : '[id].[contenthash].css',
   })
 ]
 
 module.exports = {
   entry: `${PATH_SRC}/index.js`,
   output: {
-    filename: '[name].[contenthash].js',
+    filename: isDev ? '[name].[hash].js': '[name].[contenthash].js',
     path: resolve(__dirname, 'dist')
   },
   module: {
@@ -28,7 +30,13 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: isDev,
+              reloadAll: true,
+            }
+          },
           'css-loader'
         ]
       },
@@ -48,5 +56,6 @@ module.exports = {
     port: '9000',
     stats: 'minimal',
     historyApiFallback: true,
+    hot: isDev,
   }
 }
