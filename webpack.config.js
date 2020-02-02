@@ -7,8 +7,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserWebpackPlugin  = require('terser-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
-const PATH_SRC = resolve(__dirname, 'src')
-
 const isDev = process.env.NODE_ENV === 'development'
 const isProd = !isDev
 
@@ -16,7 +14,7 @@ const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`
 
 const plugins = [
   new HtmlWebpackPlugin({
-    template: `${PATH_SRC}/index.html`,
+    template: `./index.html`,
     minify: {
       collapseWhitespace: isProd
     },
@@ -38,7 +36,8 @@ const optimization = {
 }
 
 module.exports = {
-  entry: `${PATH_SRC}/index.js`,
+  context: resolve(__dirname, 'src'),
+  entry: `./index.js`,
   output: {
     filename: filename('js'),
     path: resolve(__dirname, 'dist')
