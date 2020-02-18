@@ -33,10 +33,10 @@
 ```
 $ npm init
 ```
-And create a base project structure, for example:
+Then create a base project structure, for example:
 ```
   |- package.json
-+ |- /src
++ |- src/
 +   |- index.js
 +   |- index.html
 ```
@@ -46,9 +46,9 @@ $ npm i webpack webpack-cli -D
 ```
 3.  Create `webpack.config.js` in the directory root.
 ```
-+ | webpack.config.js
++ |- webpack.config.js
   |- package.json
-  |- /src
+  |- src/
     |- index.js
     |- index.html
 ```
@@ -66,5 +66,5 @@ module.exports = {
   output: {
     filename: filename('js'),
     path: resolve(__dirname, 'dist')
-  }
+}
 ```
