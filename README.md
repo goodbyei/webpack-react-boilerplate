@@ -1,5 +1,8 @@
 # webpack-react-boilerplate
 
+- [Short HOW-TO](#short-how-to)
+- [Detailed HOW-TO](#detailed-how-to)
+
 # Short HOW-TO
 1.  Initialize a project using [npm](https://docs.npmjs.com/cli/init/) or [yarn](https://classic.yarnpkg.com/ru/docs/cli/init/);
 2.  Install [webpack](https://github.com/webpack/webpack/) and [webpack-cli](https://github.com/webpack/webpack-cli/);
@@ -24,3 +27,5 @@
     -    [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin) for js minifiynig;
     -    [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) for css minifying;
     -    option [minify {}](https://github.com/jantimon/html-webpack-plugin#minification) in html-webpack-plugin for html minifying;
+
+# Detailed HOW-TO
