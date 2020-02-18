@@ -30,7 +30,7 @@
 
 # Detailed HOW-TO
 1.  First of all, you need to initialize your project using [npm](https://docs.npmjs.com/cli/init/) or [yarn](https://classic.yarnpkg.com/ru/docs/cli/init/). Here and below, I'm going to use npm, but you can use yarn, it'll be similar.
-```
+```shell script
 $ npm init
 ```
 Then create a base project structure, for example:
@@ -41,7 +41,7 @@ Then create a base project structure, for example:
 +   |- index.html
 ```
 2.  Install [webpack](https://github.com/webpack/webpack/) (a module bundler itself) and [webpack-cli](https://github.com/webpack/webpack-cli/) (a tool used to run webpack on the command line) as dev dependencies.
-```
+```shell script
 $ npm i webpack webpack-cli -D
 ```
 3.  Create `webpack.config.js` in the directory root.
