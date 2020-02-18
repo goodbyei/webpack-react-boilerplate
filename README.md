@@ -4,7 +4,7 @@
 - [Detailed HOW-TO](#detailed-how-to)
 
 # Short HOW-TO
-1.  Initialize a project using [npm](https://docs.npmjs.com/cli/init/) or [yarn](https://classic.yarnpkg.com/ru/docs/cli/init/);
+1.  Initialize a project using [npm](https://docs.npmjs.com/cli/init/) or [yarn](https://classic.yarnpkg.com/ru/docs/cli/init/) and create a base project structure;
 2.  Install [webpack](https://github.com/webpack/webpack/) and [webpack-cli](https://github.com/webpack/webpack-cli/);
 3.  Create `webpack.config.js` in the directory root, add [context and entry points](https://webpack.js.org/configuration/entry-context/) and describe [output](https://webpack.js.org/configuration/output/) configuration;
 4.  Add [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) for working with HTML;
@@ -29,3 +29,42 @@
     -    option [minify {}](https://github.com/jantimon/html-webpack-plugin#minification) in html-webpack-plugin for html minifying;
 
 # Detailed HOW-TO
+1.  First of all, you need to initialize your project using [npm](https://docs.npmjs.com/cli/init/) or [yarn](https://classic.yarnpkg.com/ru/docs/cli/init/). Here and below, I'm going to use npm, but you can use yarn, it'll be similar.
+```
+$ npm init
+```
+And create a base project structure, for example:
+```
+  |- package.json
++ |- /src
++   |- index.js
++   |- index.html
+```
+2.  Install [webpack](https://github.com/webpack/webpack/) (a module bundler itself) and [webpack-cli](https://github.com/webpack/webpack-cli/) (a tool used to run webpack on the command line) as dev dependencies.
+```
+$ npm i webpack webpack-cli -D
+```
+3.  Create `webpack.config.js` in the directory root.
+```
++ | webpack.config.js
+  |- package.json
+  |- /src
+    |- index.js
+    |- index.html
+```
+Add [context and entry points](https://webpack.js.org/configuration/entry-context/) and describe [output](https://webpack.js.org/configuration/output/) configuration; 
+```js
+const { resolve } = require('path')
+
+const isDev = process.env.NODE_ENV === 'development'
+
+const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`
+
+module.exports = {
+  context: resolve(__dirname, 'src'),
+  entry: `./index.js`,
+  output: {
+    filename: filename('js'),
+    path: resolve(__dirname, 'dist')
+  }
+```
