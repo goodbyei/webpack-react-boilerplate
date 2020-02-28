@@ -30,21 +30,27 @@
 
 # Detailed HOW-TO
 1.  First of all, you need to initialize your project using [npm](https://docs.npmjs.com/cli/init/) or [yarn](https://classic.yarnpkg.com/ru/docs/cli/init/). Here and below, I'm going to use npm, but you can use yarn, it'll be similar.
+
 ```shell script
 $ npm init
 ```
 Then create a base project structure, for example:
+
 ```
   |- package.json
 + |- src/
 +   |- index.js
 +   |- index.html
 ```
-2.  Install [webpack](https://github.com/webpack/webpack/) (a module bundler itself) and [webpack-cli](https://github.com/webpack/webpack-cli/) (a tool used to run webpack on the command line) as dev dependencies.
+
+2.  Install [webpack](https://github.com/webpack/webpack/) (a module bundler itself) and [webpack-cli](https://github.com/webpack/webpack-cli/) (a tool used to run webpack on the command line) as dev dependency.
+
 ```shell script
 $ npm i webpack webpack-cli -D
 ```
+
 3.  Create `webpack.config.js` in the directory root.
+
 ```
 + |- webpack.config.js
   |- package.json
@@ -52,7 +58,10 @@ $ npm i webpack webpack-cli -D
     |- index.js
     |- index.html
 ```
+
 2.  Add [context and entry points](https://webpack.js.org/configuration/entry-context/) and describe [output](https://webpack.js.org/configuration/output/) configuration; 
+
+##### webpack.config.js
 ```js
 const { resolve } = require('path')
 
@@ -68,7 +77,14 @@ module.exports = {
     path: resolve(__dirname, 'dist')
 }
 ```
-3.  For working with HTML install [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) and describe required parameters.
+
+3.  For working with HTML install [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) as dev dependency and describe required parameters.
+
+```shell script
+$ npm i html-webpack-plugin -D
+```
+
+##### webpack.config.js
 ```js
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -85,10 +101,16 @@ module.exports = {
   plugins,
 }
 ```
+
 4. Add the loaders you need.
 
 First, add [css-loader](https://github.com/webpack-contrib/css-loader) to make webpack understand CSS syntax like `@import` and `url()`.
 
+```shell script
+$ npm i css-loader -D
+```
+
+##### webpack.config.js
 ```js
 module.exports = {
   /*
@@ -107,8 +129,15 @@ module.exports = {
   /* plugins here */
 }
 ```
+
 If you want your CSS to be injected into `<head />` section in `index.html`, add [style-loader](https://github.com/webpack-contrib/style-loader).
 It's important to place style-loader before css-loader, because webpack uses loaders from right to left.
+
+```shell script
+$ npm i style-loader -D
+```
+
+##### webpack.config.js
 ```js
 module.exports = {
   /*
@@ -124,8 +153,14 @@ module.exports = {
   },
 }
 ```
+
 Otherwise, to extract CSS into separate files add [MiniCssExtractPlugin](https://github.com/webpack-contrib/mini-css-extract-plugin) and its loader.
 
+```shell script
+$ npm i mini-css-extract-plugin -D
+```
+
+##### webpack.config.js
 ```js
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -159,7 +194,16 @@ module.exports = {
   plugins
 }
 ```
+
+Important: don't use `style-loader` и `MiniCssExtractPlugin.loader` together.
+
 Add [file-loader](https://github.com/webpack-contrib/file-loader) to resolve imports on a file.
+
+```shell script
+$ npm i file-loader -D
+```
+
+##### webpack.config.js
 ```js
 module.exports = {
   /* 
@@ -180,5 +224,6 @@ module.exports = {
   },
 }
 ```
+
 If you are going to work with SASS or LESS add [sass-loader](https://github.com/webpack-contrib/sass-loader) and [less-loader](https://github.com/webpack-contrib/less-loader).
 
