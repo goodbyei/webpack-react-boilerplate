@@ -52,7 +52,7 @@ $ npm i webpack webpack-cli -D
     |- index.js
     |- index.html
 ```
-Add [context and entry points](https://webpack.js.org/configuration/entry-context/) and describe [output](https://webpack.js.org/configuration/output/) configuration; 
+2.  Add [context and entry points](https://webpack.js.org/configuration/entry-context/) and describe [output](https://webpack.js.org/configuration/output/) configuration; 
 ```js
 const { resolve } = require('path')
 
@@ -68,3 +68,117 @@ module.exports = {
     path: resolve(__dirname, 'dist')
 }
 ```
+3.  For working with HTML install [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) and describe required parameters.
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+const plugins = [
+  new HtmlWebpackPlugin({
+    template: `./index.html`,
+  }),
+]
+
+module.exports = {
+  /*
+    ...
+  */
+  plugins,
+}
+```
+4. Add the loaders you need.
+
+First, add [css-loader](https://github.com/webpack-contrib/css-loader) to make webpack understand CSS syntax like `@import` and `url()`.
+
+```js
+module.exports = {
+  /*
+    ...
+  */
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'css-loader'
+        ]
+      },
+    ]
+  },
+  /* plugins here */
+}
+```
+If you want your CSS to be injected into `<head />` section in `index.html`, add [style-loader](https://github.com/webpack-contrib/style-loader).
+It's important to place style-loader before css-loader, because webpack uses loaders from right to left.
+```js
+module.exports = {
+  /*
+    ...
+  */
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+    ]
+  },
+}
+```
+Otherwise, to extract CSS into separate files add [MiniCssExtractPlugin](https://github.com/webpack-contrib/mini-css-extract-plugin) and its loader.
+
+```js
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+const plugins = [
+  /*
+    ...
+  */
+  new MiniCssExtractPlugin({
+    filename: filename('css'),
+  }),
+]
+
+module.exports = {
+  /*
+    ... 
+  */
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          'css-loader'
+        ]
+      },
+    ]
+  },
+  plugins
+}
+```
+Add [file-loader](https://github.com/webpack-contrib/file-loader) to resolve imports on a file.
+```js
+module.exports = {
+  /* 
+    ... 
+  */
+  module: {
+    rules: [
+      /* ... */
+      {
+        test: /\.(gif|png|jpg|jpeg|svg)?$/,
+        loader: 'file-loader',
+      },
+      {
+        test: /\.(ttf|eot|woff|woff2)$/,
+        loader: 'file-loader',
+      }
+    ]
+  },
+}
+```
+If you are going to work with SASS or LESS add [sass-loader](https://github.com/webpack-contrib/sass-loader) and [less-loader](https://github.com/webpack-contrib/less-loader).
+
