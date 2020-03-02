@@ -14,7 +14,6 @@
     -   [less-loader](https://github.com/webpack-contrib/less-loader);
     -   [sass-loader](https://github.com/webpack-contrib/sass-loader);
     -   [file-loader](https://github.com/webpack-contrib/file-loader)
-    
     etc;
 6.  Add [babel](https://babeljs.io/docs/en/usage) and babel presets you need;
 7.  Add [babel-loader](https://github.com/babel/babel-loader);
@@ -227,3 +226,49 @@ module.exports = {
 
 If you are going to work with SASS or LESS add [sass-loader](https://github.com/webpack-contrib/sass-loader) and [less-loader](https://github.com/webpack-contrib/less-loader).
 
+5.  To convert ECMAScript 2015+ code into a compatible JavaScript version in current and older browsers you need to setup [Babel](https://babeljs.io/docs/en/usage). To do this, install the required packages and edit the configuration file as follows.
+
+```shell script
+$ yarn add @babel/core @babel/preset-env babel-loader -D
+```
+
+And change `webpack.config.js` as follow
+
+##### webpack.config.js
+
+```js
+module.exports = {
+  /* ... */
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env',
+            ]
+          }
+        }
+      },
+      /* ... */
+    ]
+  },
+}
+```
+
+6.  Install `react` and `react-dom` to work with React.
+
+```shell script
+$ yarn add react react-dom
+```
+
+To make Babel transform JSX syntax, install `@babel/preset-react` with
+
+```shell script
+$ yarn add @babel/preset-react -D
+```
+
+and add it to presets array in `webpack.config.js`.
