@@ -33,6 +33,7 @@
 ```shell script
 $ npm init
 ```
+
 Then create a base project structure, for example:
 
 ```
@@ -48,7 +49,7 @@ Then create a base project structure, for example:
 $ npm i webpack webpack-cli -D
 ```
 
-3.  Create `webpack.config.js` in the directory root.
+Create `webpack.config.js` in the directory root.
 
 ```
 + |- webpack.config.js
@@ -58,7 +59,7 @@ $ npm i webpack webpack-cli -D
     |- index.html
 ```
 
-2.  Add [context and entry points](https://webpack.js.org/configuration/entry-context/) and describe [output](https://webpack.js.org/configuration/output/) configuration; 
+Add [context and entry points](https://webpack.js.org/configuration/entry-context/) and describe [output](https://webpack.js.org/configuration/output/) configuration.
 
 ##### webpack.config.js
 ```js
@@ -77,11 +78,13 @@ module.exports = {
 }
 ```
 
-3.  For working with HTML install [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) as dev dependency and describe required parameters.
+3.  For working with HTML install [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) with
 
 ```shell script
 $ npm i html-webpack-plugin -D
 ```
+
+and describe required parameters in `webpack.config.js`.
 
 ##### webpack.config.js
 ```js
@@ -125,7 +128,7 @@ module.exports = {
       },
     ]
   },
-  /* plugins here */
+  /* ... */
 }
 ```
 
