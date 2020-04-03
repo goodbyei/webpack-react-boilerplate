@@ -7,18 +7,18 @@
 1.  Initialize a project using [npm](https://docs.npmjs.com/cli/init/) or [yarn](https://classic.yarnpkg.com/ru/docs/cli/init/) and create a base project structure;
 2.  Install [webpack](https://github.com/webpack/webpack/) and [webpack-cli](https://github.com/webpack/webpack-cli/);
 3.  Create `webpack.config.js` in the directory root, add [context and entry points](https://webpack.js.org/configuration/entry-context/) and describe [output](https://webpack.js.org/configuration/output/) configuration;
-4.  Add [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) for working with HTML;
-5.  Add loaders you need:
+4.  Setup build scripts;
+5.  Add [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) for working with HTML;
+6.  Add loaders you need:
     -	[css-loader](https://github.com/webpack-contrib/css-loader);
     -	[style-loader](https://github.com/webpack-contrib/style-loader) or loader from [MiniCssExtractPlugin](https://github.com/webpack-contrib/mini-css-extract-plugin);
     -   [less-loader](https://github.com/webpack-contrib/less-loader);
     -   [sass-loader](https://github.com/webpack-contrib/sass-loader);
     -   [file-loader](https://github.com/webpack-contrib/file-loader)
     etc;
-6.  Add [babel](https://babeljs.io/docs/en/usage) and babel presets you need;
-7.  Add [babel-loader](https://github.com/babel/babel-loader);
-8.  Add [react and react-dom](https://github.com/facebook/react);
-9.  Setup build scripts;
+7.  Add [babel](https://babeljs.io/docs/en/usage) and babel presets you need;
+8.  Add [babel-loader](https://github.com/babel/babel-loader);
+9.  Add [react and react-dom](https://github.com/facebook/react);
 10. Setup [webpack-dev-server](https://webpack.js.org/configuration/dev-server/);
 11. Setup [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/);
 12. Setup optimization:
@@ -59,7 +59,42 @@ Create `webpack.config.js` in the directory root.
     |- index.html
 ```
 
-Add [context and entry points](https://webpack.js.org/configuration/entry-context/) and describe [output](https://webpack.js.org/configuration/output/) configuration.
+Add basic [context and entry points](https://webpack.js.org/configuration/entry-context/) and describe [output](https://webpack.js.org/configuration/output/) configuration.
+
+##### webpack.config.js
+```js
+const { resolve } = require('path')
+
+module.exports = {
+  context: resolve(__dirname, 'src'),
+  entry: `./index.js`,
+  output: {
+    filename: `[name].js`,
+    path: resolve(__dirname, 'dist')
+}
+```
+
+3. Setup build scripts.
+
+Install [cross-env](https://github.com/kentcdodds/cross-env) to set and use environment variables across platform.
+
+```shell script
+$ npm i cross-env -D
+```
+
+Edit `scripts` field in `package.json`.
+
+##### package.json
+```json
+{
+    "scripts": {
+        "dev": "cross-env NODE_ENV=development webpack --mode development",
+        "build": "cross-env NODE_ENV=production webpack --mode production"
+    }
+}
+```
+
+Update `webpack.config.js` as follows.
 
 ##### webpack.config.js
 ```js
@@ -78,7 +113,7 @@ module.exports = {
 }
 ```
 
-3.  For working with HTML install [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) with
+4.  For working with HTML install [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) with
 
 ```shell script
 $ npm i html-webpack-plugin -D
@@ -104,7 +139,7 @@ module.exports = {
 }
 ```
 
-4. Add the loaders you need.
+5. Add the loaders you need.
 
 First, add [css-loader](https://github.com/webpack-contrib/css-loader) to make webpack understand CSS syntax like `@import` and `url()`.
 
@@ -229,7 +264,7 @@ module.exports = {
 
 If you are going to work with SASS or LESS add [sass-loader](https://github.com/webpack-contrib/sass-loader) and [less-loader](https://github.com/webpack-contrib/less-loader).
 
-5.  To convert ECMAScript 2015+ code into a compatible JavaScript version in current and older browsers you need to setup [Babel](https://babeljs.io/docs/en/usage). To do this, install the required packages and edit the configuration file as follows.
+6.  To convert ECMAScript 2015+ code into a compatible JavaScript version in current and older browsers you need to setup [Babel](https://babeljs.io/docs/en/usage). To do this, install the required packages and edit the configuration file as follows.
 
 ```shell script
 $ npm i @babel/core @babel/preset-env babel-loader -D
@@ -262,7 +297,7 @@ module.exports = {
 }
 ```
 
-6.  Install `react` and `react-dom` to work with React.
+7.  Install `react` and `react-dom` to work with React.
 
 ```shell script
 $ npm i react react-dom
@@ -275,26 +310,6 @@ $ npm i @babel/preset-react -D
 ```
 
 and add it to presets array in `webpack.config.js`.
-
-7. Setup build scripts.
-
-Install [cross-env](https://github.com/kentcdodds/cross-env) to set and use environment variables across platform.
-
-```shell script
-$ npm i cross-env -D
-```
-
-And edit `scripts` field in `package.json`.
-
-##### package.json
-```json
-{
-    "scripts": {
-        "dev": "cross-env NODE_ENV=development webpack --mode development",
-        "build": "cross-env NODE_ENV=production webpack --mode production"
-    }
-}
-```
 
 8.  Setup webpack-dev-server.
 
