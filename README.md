@@ -22,7 +22,7 @@
 10. Set up the [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/);
 11. Set up the optimization:
     -    [splitChunks](https://webpack.js.org/configuration/optimization/);
-    -    [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin) for js minifiynig;
+    -    [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin) for JavaScript code minifiynig;
     -    [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) for css minifying;
     -    option [minify {}](https://github.com/jantimon/html-webpack-plugin#minification) in html-webpack-plugin for html minifying;
 
@@ -426,3 +426,78 @@ module.exports = {
 
 11. Set up the optimization.
 
+Create the `optimization` object and add [chunks splitting](https://webpack.js.org/configuration/optimization/).
+
+##### webpack.config.js
+```js
+const optimization = {
+  splitChunks: {
+    chunks: 'all'
+  },
+}
+
+module.exports = {
+  /* ... */
+  optimization,
+}
+```
+
+To minify JavaScript code, install [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin)
+
+```shell script
+$ npm i terser-webpack-plugin -D
+```
+
+Create a `minimizer` property in your `optimization` object and add the `TerserWebpackPlugin` there.
+
+##### webpack.config.js
+```js
+const TerserWebpackPlugin  = require('terser-webpack-plugin')
+
+const optimization = {
+  /* ... */
+  minimizer: [
+    new TerserWebpackPlugin(),
+  ]
+}
+
+```
+
+For CSS optimization, install [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin):
+
+```shell script
+$ npm i optimize-css-assets-webpack-plugin -D
+```
+
+And add it to `minimazer` array in your `optimization` object.
+
+##### webpack.config.js
+```js
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+
+const optimization = {
+  /* ... */
+  minimizer: [
+    /* ... */
+    new OptimizeCssAssetsPlugin(),
+  ]
+}
+
+```
+
+Add a `minify` property in the `HtmlWebpackPlugin` options list.
+
+##### webpack.config.js
+```js
+
+const plugins = [
+  new HtmlWebpackPlugin({
+    /* ... */
+    minify: {
+      collapseWhitespace: isProd
+    },
+  })
+  /* ... */
+]
+
+```
