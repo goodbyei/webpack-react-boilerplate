@@ -127,15 +127,22 @@ $ npm i clean-webpack-plugin -D
 And add it to the `plugins` array in `webpack.config.js`
 
 ```js
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const plugins = [
-  /* ... */
   new CleanWebpackPlugin(),
 ]
 
+module.exports = {
+  /*
+    ...
+  */
+  plugins,
+}
+
 ```
 
-4.  For working with HTML install [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) with
+4.  To work with HTML, install [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
 
 ```shell script
 $ npm i html-webpack-plugin -D
@@ -148,17 +155,11 @@ and describe required parameters in `webpack.config.js`.
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const plugins = [
+  /* ... */
   new HtmlWebpackPlugin({
     template: `./index.html`,
   }),
 ]
-
-module.exports = {
-  /*
-    ...
-  */
-  plugins,
-}
 ```
 
 5. Add the loaders you need.
