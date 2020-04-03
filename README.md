@@ -9,7 +9,7 @@ This is just an attempt to gather all Webpack setup information in one place.
 - [Detailed HOW-TO](#detailed-how-to)
 
 # Short HOW-TO
-1.  Initialize a project using [npm](https://docs.npmjs.com/cli/init/) or [yarn](https://classic.yarnpkg.com/ru/docs/cli/init/) and create a base project structure;
+1.  Initialize a project using [npm](https://docs.npmjs.com/cli/init/) or [yarn](https://classic.yarnpkg.com/ru/docs/cli/init/) and create a basic project structure;
 2.  Install [webpack](https://github.com/webpack/webpack/) and [webpack-cli](https://github.com/webpack/webpack-cli/);
 3.  Create `webpack.config.js` in the directory root, add basic [context and entry points](https://webpack.js.org/configuration/entry-context/) and describe [output](https://webpack.js.org/configuration/output/) configuration;
 4.  Set up build scripts, caching and add [CleanWebpackPlugin](https://github.com/johnagan/clean-webpack-plugin);
@@ -27,9 +27,9 @@ This is just an attempt to gather all Webpack setup information in one place.
 10. Set up the [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/);
 11. Set up the optimization:
     -    [splitChunks](https://webpack.js.org/configuration/optimization/);
-    -    [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin) for JavaScript code minifiynig;
-    -    [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) for css minifying;
-    -    option [minify {}](https://github.com/jantimon/html-webpack-plugin#minification) in html-webpack-plugin for html minifying;
+    -    [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin) for JavaScript minification;
+    -    [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) for CSS minification;
+    -    option [minify {}](https://github.com/jantimon/html-webpack-plugin#minification) in html-webpack-plugin for html minification;
 
 # Detailed HOW-TO
 1.  First of all, you need to initialize your project using [npm](https://docs.npmjs.com/cli/init/) or [yarn](https://classic.yarnpkg.com/ru/docs/cli/init/). Here and below, I'm going to use npm, but you can use yarn, it'll be similar.
@@ -365,7 +365,7 @@ module.exports = {
 Install `webpack-dev-server` with
 
 ```shell script
-$ yarn add webpack-dev-server -D
+$ npm i webpack-dev-server -D
 ```
 
 and configure it as follows.
