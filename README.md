@@ -316,7 +316,7 @@ module.exports = {
 }
 ```
 
-7.  Install `react` and `react-dom` to work with React.
+8.  Install `react` and `react-dom` to work with React.
 
 ```shell script
 $ npm i react react-dom
@@ -385,6 +385,9 @@ If you use `MiniCssExtractPlugin`, add the following options to its loader.
 
 ##### webpack.config.js
 ```js
+
+/* ... */
+
 module.exports = {
   module: {
     rules: [
@@ -404,4 +407,5 @@ module.exports = {
     ]
   },
 }
+
 ```
