@@ -76,7 +76,7 @@ module.exports = {
 
 ```
 
-3. Setup build scripts.
+4. Setup build scripts.
 
 Install [cross-env](https://github.com/kentcdodds/cross-env) to set and use environment variables across platform.
 
