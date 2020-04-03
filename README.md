@@ -7,7 +7,7 @@
 1.  Initialize a project using [npm](https://docs.npmjs.com/cli/init/) or [yarn](https://classic.yarnpkg.com/ru/docs/cli/init/) and create a base project structure;
 2.  Install [webpack](https://github.com/webpack/webpack/) and [webpack-cli](https://github.com/webpack/webpack-cli/);
 3.  Create `webpack.config.js` in the directory root, add basic [context and entry points](https://webpack.js.org/configuration/entry-context/) and describe [output](https://webpack.js.org/configuration/output/) configuration;
-4.  Setup build scripts, caching and add [CleanWebpackPlugin](https://github.com/johnagan/clean-webpack-plugin);
+4.  Set up build scripts, caching and add [CleanWebpackPlugin](https://github.com/johnagan/clean-webpack-plugin);
 5.  To work with HTML, add [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin);
 6.  Add loaders you need:
     -	[css-loader](https://github.com/webpack-contrib/css-loader);
@@ -18,9 +18,9 @@
     etc;
 7.  Add [babel](https://babeljs.io/docs/en/usage), [babel-loader](https://github.com/babel/babel-loader) and babel presets you need;
 8.  Add [react and react-dom](https://github.com/facebook/react);
-9. Setup [webpack-dev-server](https://webpack.js.org/configuration/dev-server/);
-10. Setup [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/);
-11. Setup optimization:
+9. Set up [webpack-dev-server](https://webpack.js.org/configuration/dev-server/);
+10. Set up the [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/);
+11. Set up the optimization:
     -    [splitChunks](https://webpack.js.org/configuration/optimization/);
     -    [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin) for js minifiynig;
     -    [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) for css minifying;
@@ -75,7 +75,7 @@ module.exports = {
 
 ```
 
-4. Setup build scripts.
+4. Set up the build scripts.
 
 Install [cross-env](https://github.com/kentcdodds/cross-env) to set and use environment variables across platform.
 
@@ -286,7 +286,7 @@ module.exports = {
 
 If you are going to work with SASS or LESS add [sass-loader](https://github.com/webpack-contrib/sass-loader) and [less-loader](https://github.com/webpack-contrib/less-loader).
 
-7.  To convert ECMAScript 2015+ code into a compatible JavaScript version in current and older browsers you need to setup [Babel](https://babeljs.io/docs/en/usage). To do this, install the required packages and edit the configuration file as follows.
+7.  To convert ECMAScript 2015+ code into a compatible JavaScript version in current and older browsers you need to set up [Babel](https://babeljs.io/docs/en/usage). To do this, install the required packages and edit the configuration file as follows.
 
 ```shell script
 $ npm i @babel/core @babel/preset-env babel-loader -D
@@ -355,7 +355,7 @@ module.exports = {
 }
 ```
 
-8.  Setup webpack-dev-server.
+8.  Set up [webpack-dev-server](https://webpack.js.org/configuration/dev-server/);.
 
 Install `webpack-dev-server` with
 
@@ -379,7 +379,7 @@ module.exports = {
 }
 ```
 
-9. Setup Hot Module Replacement (HMR).
+9. Set up the [Hot Module Replacement (HMR)](https://webpack.js.org/concepts/hot-module-replacement/);
 
 If you use `MiniCssExtractPlugin`, add the following options to its loader.
 
@@ -423,3 +423,6 @@ module.exports = {
   }
 }
 ```
+
+11. Set up the optimization.
+
