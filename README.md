@@ -8,7 +8,7 @@
 2.  Install [webpack](https://github.com/webpack/webpack/) and [webpack-cli](https://github.com/webpack/webpack-cli/);
 3.  Create `webpack.config.js` in the directory root, add basic [context and entry points](https://webpack.js.org/configuration/entry-context/) and describe [output](https://webpack.js.org/configuration/output/) configuration;
 4.  Setup build scripts, caching and add [CleanWebpackPlugin](https://github.com/johnagan/clean-webpack-plugin);
-5.  Add [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) for working with HTML;
+5.  To work with HTML, add [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin);
 6.  Add loaders you need:
     -	[css-loader](https://github.com/webpack-contrib/css-loader);
     -	[style-loader](https://github.com/webpack-contrib/style-loader) or loader from [MiniCssExtractPlugin](https://github.com/webpack-contrib/mini-css-extract-plugin);
@@ -16,12 +16,11 @@
     -   [sass-loader](https://github.com/webpack-contrib/sass-loader);
     -   [file-loader](https://github.com/webpack-contrib/file-loader)
     etc;
-7.  Add [babel](https://babeljs.io/docs/en/usage) and babel presets you need;
-8.  Add [babel-loader](https://github.com/babel/babel-loader);
-9.  Add [react and react-dom](https://github.com/facebook/react);
-10. Setup [webpack-dev-server](https://webpack.js.org/configuration/dev-server/);
-11. Setup [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/);
-12. Setup optimization:
+7.  Add [babel](https://babeljs.io/docs/en/usage), [babel-loader](https://github.com/babel/babel-loader) and babel presets you need;
+8.  Add [react and react-dom](https://github.com/facebook/react);
+9. Setup [webpack-dev-server](https://webpack.js.org/configuration/dev-server/);
+10. Setup [Hot Module Replacement](https://webpack.js.org/concepts/hot-module-replacement/);
+11. Setup optimization:
     -    [splitChunks](https://webpack.js.org/configuration/optimization/);
     -    [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin) for js minifiynig;
     -    [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) for css minifying;
@@ -162,7 +161,7 @@ const plugins = [
 ]
 ```
 
-5. Add the loaders you need.
+6. Add the loaders you need.
 
 First, add [css-loader](https://github.com/webpack-contrib/css-loader) to make webpack understand CSS syntax like `@import` and `url()`.
 
@@ -214,7 +213,7 @@ module.exports = {
 }
 ```
 
-Otherwise, to extract CSS into separate files add [MiniCssExtractPlugin](https://github.com/webpack-contrib/mini-css-extract-plugin) and its loader.
+Otherwise, to extract CSS into separate files, add [MiniCssExtractPlugin](https://github.com/webpack-contrib/mini-css-extract-plugin) and its loader.
 
 ```shell script
 $ npm i mini-css-extract-plugin -D
@@ -287,16 +286,13 @@ module.exports = {
 
 If you are going to work with SASS or LESS add [sass-loader](https://github.com/webpack-contrib/sass-loader) and [less-loader](https://github.com/webpack-contrib/less-loader).
 
-6.  To convert ECMAScript 2015+ code into a compatible JavaScript version in current and older browsers you need to setup [Babel](https://babeljs.io/docs/en/usage). To do this, install the required packages and edit the configuration file as follows.
+7.  To convert ECMAScript 2015+ code into a compatible JavaScript version in current and older browsers you need to setup [Babel](https://babeljs.io/docs/en/usage). To do this, install the required packages and edit the configuration file as follows.
 
 ```shell script
 $ npm i @babel/core @babel/preset-env babel-loader -D
 ```
 
-And change `webpack.config.js` as follow
-
 ##### webpack.config.js
-
 ```js
 module.exports = {
   /* ... */
@@ -333,6 +329,31 @@ $ npm i @babel/preset-react -D
 ```
 
 and add it to presets array in `webpack.config.js`.
+
+##### webpack.config.js
+```js
+module.exports = {
+  /* ... */
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              /* ... */
+              '@babel/preset-react',
+            ]
+          }
+        }
+      },
+      /* ... */
+    ]
+  },
+}
+```
 
 8.  Setup webpack-dev-server.
 
