@@ -111,6 +111,7 @@ module.exports = {
   output: {
     filename: filename('js'),
     /* ... */
+  }
 }
 
 ```
