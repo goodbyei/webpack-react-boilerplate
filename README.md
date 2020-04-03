@@ -142,7 +142,7 @@ module.exports = {
 
 ```
 
-4.  To work with HTML, install [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
+5.  To work with HTML, install [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
 
 ```shell script
 $ npm i html-webpack-plugin -D
