@@ -232,7 +232,7 @@ If you are going to work with SASS or LESS add [sass-loader](https://github.com/
 5.  To convert ECMAScript 2015+ code into a compatible JavaScript version in current and older browsers you need to setup [Babel](https://babeljs.io/docs/en/usage). To do this, install the required packages and edit the configuration file as follows.
 
 ```shell script
-$ yarn add @babel/core @babel/preset-env babel-loader -D
+$ npm i @babel/core @babel/preset-env babel-loader -D
 ```
 
 And change `webpack.config.js` as follow
@@ -265,13 +265,84 @@ module.exports = {
 6.  Install `react` and `react-dom` to work with React.
 
 ```shell script
-$ yarn add react react-dom
+$ npm i react react-dom
 ```
 
 To make Babel transform JSX syntax, install `@babel/preset-react` with
 
 ```shell script
-$ yarn add @babel/preset-react -D
+$ npm i @babel/preset-react -D
 ```
 
 and add it to presets array in `webpack.config.js`.
+
+7. Setup build scripts.
+
+Install [cross-env](https://github.com/kentcdodds/cross-env) to set and use environment variables across platform.
+
+```shell script
+$ npm i cross-env -D
+```
+
+And edit `scripts` field in `package.json`.
+
+##### package.json
+```json
+{
+    "scripts": {
+        "dev": "cross-env NODE_ENV=development webpack --mode development",
+        "build": "cross-env NODE_ENV=production webpack --mode production"
+    }
+}
+```
+
+8.  Setup webpack-dev-server.
+
+Install `webpack-dev-server` with
+
+```shell script
+$ yarn add webpack-dev-server -D
+```
+
+and configure it as follows.
+
+##### webpack.config.js
+```js
+
+module.exports = {
+  /* ... */
+  devServer: {
+    host: '0.0.0.0',
+    port: '9000',
+    stats: 'minimal',
+    historyApiFallback: true,
+  }
+}
+```
+
+9. Setup Hot Module Replacement (HMR).
+
+If you use `MiniCssExtractPlugin`, add the following options to its loader.
+
+##### webpack.config.js
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: isDev,
+              reloadAll: true,
+            }
+          },
+          /* ... */
+        ]
+      },
+    ]
+  },
+}
+```
