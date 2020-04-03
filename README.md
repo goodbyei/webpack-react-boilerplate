@@ -409,3 +409,17 @@ module.exports = {
 }
 
 ```
+
+Add the `hot` option to the `devServer` options list.
+
+##### webpack.config.js
+```js
+
+module.exports = {
+  /* ... */
+  devServer: {
+    /* ... */
+    hot: isDev,
+  }
+}
+```
