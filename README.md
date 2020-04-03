@@ -6,8 +6,8 @@
 # Short HOW-TO
 1.  Initialize a project using [npm](https://docs.npmjs.com/cli/init/) or [yarn](https://classic.yarnpkg.com/ru/docs/cli/init/) and create a base project structure;
 2.  Install [webpack](https://github.com/webpack/webpack/) and [webpack-cli](https://github.com/webpack/webpack-cli/);
-3.  Create `webpack.config.js` in the directory root, add [context and entry points](https://webpack.js.org/configuration/entry-context/) and describe [output](https://webpack.js.org/configuration/output/) configuration;
-4.  Setup build scripts;
+3.  Create `webpack.config.js` in the directory root, add basic [context and entry points](https://webpack.js.org/configuration/entry-context/) and describe [output](https://webpack.js.org/configuration/output/) configuration;
+4.  Setup build scripts, caching and add [CleanWebpackPlugin](https://github.com/johnagan/clean-webpack-plugin);
 5.  Add [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) for working with HTML;
 6.  Add loaders you need:
     -	[css-loader](https://github.com/webpack-contrib/css-loader);
@@ -49,7 +49,7 @@ Then create a base project structure, for example:
 $ npm i webpack webpack-cli -D
 ```
 
-Create `webpack.config.js` in the directory root.
+3. Create `webpack.config.js` in the directory root.
 
 ```
 + |- webpack.config.js
@@ -63,6 +63,7 @@ Add basic [context and entry points](https://webpack.js.org/configuration/entry-
 
 ##### webpack.config.js
 ```js
+
 const { resolve } = require('path')
 
 module.exports = {
@@ -72,6 +73,7 @@ module.exports = {
     filename: `[name].js`,
     path: resolve(__dirname, 'dist')
 }
+
 ```
 
 3. Setup build scripts.
@@ -94,23 +96,42 @@ Edit `scripts` field in `package.json`.
 }
 ```
 
-Update `webpack.config.js` as follows.
+Update `webpack.config.js` as follows. Add `isDev` variable, and create `filename` function for preventing cache problems.
 
 ##### webpack.config.js
 ```js
-const { resolve } = require('path')
+/* ... */
 
 const isDev = process.env.NODE_ENV === 'development'
 
 const filename = ext => isDev ? `[name].${ext}` : `[name].[hash].${ext}`
 
 module.exports = {
-  context: resolve(__dirname, 'src'),
-  entry: `./index.js`,
+  /* ... */
   output: {
     filename: filename('js'),
-    path: resolve(__dirname, 'dist')
+    /* ... */
 }
+
+```
+
+Then install [CleanWebpackPlugin](https://github.com/johnagan/clean-webpack-plugin) for automatically cleaning the build directory.
+
+```shell script
+
+$ npm i clean-webpack-plugin -D
+
+```
+
+And add it to the `plugins` array in `webpack.config.js`
+
+```js
+
+const plugins = [
+  /* ... */
+  new CleanWebpackPlugin(),
+]
+
 ```
 
 4.  For working with HTML install [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) with
