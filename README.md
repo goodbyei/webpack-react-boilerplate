@@ -1,5 +1,10 @@
 # webpack-react-boilerplate
 
+# About
+This is just an attempt to gather all Webpack setup information in one place.
+
+# Table of contents
+
 - [Short HOW-TO](#short-how-to)
 - [Detailed HOW-TO](#detailed-how-to)
 
