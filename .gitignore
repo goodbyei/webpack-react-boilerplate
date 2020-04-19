@@ -1,0 +1,20 @@
+# Dependency directory
+node_modules/
+
+# Build directory
+dist/
+
+# Logs
+logs
+npm-debug.log*
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Always-ignore extensions
+*.diff
+*.err
+*.log
