@@ -76,6 +76,7 @@ module.exports = {
   output: {
     filename: `[name].js`,
     path: resolve(__dirname, 'dist')
+  }
 }
 
 ```
